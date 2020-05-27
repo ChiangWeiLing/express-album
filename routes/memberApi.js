@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 //在最上方引入memberModel
 var memberModel = require('../models/memberModel.js');
 
@@ -10,7 +11,8 @@ router.post('/register', function (req, res) {
         name: req.body.name,
         account: req.body.account,
         password: req.body.password,
-    })
+        photos:[]
+    });
     memberModel.count({ account: req.body.account }, function
         (err, data) {
         if (data > 0) {

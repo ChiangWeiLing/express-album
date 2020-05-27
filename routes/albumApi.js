@@ -8,8 +8,8 @@ var storage = multer.diskStorage({
     destination:function(req,file,cb){
         cb(null,'./public/photos');
     },
-    filename:function(req,file,cb){
-        var str = file.originalname.spilt('.');
+    filename: function(req,file,cb){
+        var str = file.originalname.split('.');
         cb(null,Date.now() + '.' + str[1]);
     }
 });
@@ -28,6 +28,45 @@ router.post('/upload',upload.single("file"),function(req,res,next){
                 res.json({"status":0, "msg": "success", "photos":data.photos});
             }
         });
+    });
+});
+
+//取得所有照片
+router.post("/getAlbum",function (req,res,next) {
+    memberModel.findOne({ account:req.body.account }, function (err, data) {
+        if (err) {
+            res.json({"status":1, "msg": "error"});
+        }
+        else {
+            res.json({"status":0, "msg": "success", "data":data});
+        }
+    });
+});
+
+//刪除相片功能
+router.post("/delete",function (req,res,next) {
+    memberModel.findOne({ account: req.body.account }, function(err,data) {
+        if (err) {
+            res.json({"status":1, "msg": "error"});
+        }
+        else {
+            var images = req.body.images;
+            for (var i in images) {
+                var index = data.photos.indexOf(images[i]);
+                if (index > -1) {
+                    data.photos.splice(index, 1);
+                }
+            }
+            data.markModified('photos');
+            data.save(function(err) {
+                if (err) {
+                    res.json({"status":1, "msg": "error"});
+                }
+                else {
+                    res.json({"status":0, "msg": "success", "photos":data.photos});
+                }
+            });
+        }
     });
 });
 

@@ -31,7 +31,21 @@
     </div>
     <div class="form-style w70div">
         <h1>相簿</h1>
+        <div class="w100div">
+            <button id="selBtn" class="commonbtn selBtn" onclick="onSelect()">選取</button>
+            <button id="cnBtn" class="commonbtn cnBtn" onclick="cnSelect()">取消</button>
+            <button id="delBtn" class="commonbtn delBtn" onclick="onDelete()">刪除</button>
+        </div>
+        <fieldset>
+            <legend>我的相片</legend>
+            <div id="albumForm"> </div>
+        </fieldset>
     </div>
+    <div id="preview" class="preview_content">
+        <a href="JavaScript:void(0)" class="closepreviewlink" onclick="closeDialog()">關閉</a>
+        <img id="image" src="/public/photos/0r7qN8U.png" />
+    </div>
+    <div id="previewbg" class="black_overlay"></div>
     <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script type="text/javascript" src="./javascripts/header.js"></script>
