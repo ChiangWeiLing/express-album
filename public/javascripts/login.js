@@ -15,7 +15,7 @@ function login() {
                     $.cookie('userName', res.data.name);
                     $.cookie('userID', res.data.account);
                     alert('登入成功!');
-                    location.href = '/public/index.html';
+                    location.href = '/public/album.html';
                 }
             });
     }

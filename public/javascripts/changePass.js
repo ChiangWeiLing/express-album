@@ -19,7 +19,7 @@ function changePass() {
             }
             else {
                 alert('修改成功!');
-                location.href = '/public/index.html';
+                location.href = '/public/album.html';
             }
         });
     }
